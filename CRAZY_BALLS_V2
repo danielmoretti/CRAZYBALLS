@@ -88,7 +88,7 @@ def movimento():
         if Circulo.x > 780 or Circulo.x < 0:
             Circulo.speedx = Circulo.speedx * -1
 
-def inimigo():
+def objetos():
 
     Surface.fill((0,0,0))
     pos = pygame.mouse.get_pos()
@@ -111,6 +111,6 @@ def main():
         GetInput()
         movimento()
         CollisionDetect()
-        inimigo()
+        objetos()
 
 if __name__ == '__main__': main()
