@@ -1,5 +1,4 @@
 import pygame
-
 from pygame.locals import *
 import random, math, sys
 pygame.init()
@@ -24,7 +23,7 @@ class Circulo:
         self.y = random.randint(self.radius, 600-self.radius)
         self.speedx = 0.5*(random.random()+1.0)
         self.speedy = 0.5*(random.random()+1.0)
-for i in range(10):
+for i in range(3):
     Circulos.append(Circulo())
 
 def CircleCollide(C1,C2):
@@ -80,11 +79,19 @@ def CollisionDetect():
     for Circulo in Circulos:
         rect_circulo = pygame.rect.Rect(int(Circulo.x)-30, int(600-Circulo.y)-30, Circulo.radius * 2, Circulo.radius * 2)
         if(rect_circulo.colliderect(mouse)):
-            print("Colidiu")
+            a = pygame.mixer.Sound("colidiu.wav")
+            a.play()
+
+            # Start playback
+            
+            pygame.quit(); sys.exit()
         for Circulo2 in Circulos:
             if Circulo != Circulo2:
                 if math.sqrt(  ((Circulo.x-Circulo2.x)**2)  +  ((Circulo.y-Circulo2.y)**2)  ) <= (Circulo.radius+Circulo2.radius):
                     CircleCollide(Circulo,Circulo2)
+                    s = pygame.mixer.Sound("batevermelha.wav")
+                    s.play()
+                    
 
 
 
@@ -103,8 +110,12 @@ def movimento():
 
         if Circulo.y > 580 or Circulo.y < 0:
             Circulo.speedy = Circulo.speedy * -1
+            s = pygame.mixer.Sound("batevermelha.wav")
+            s.play()
         if Circulo.x > 780 or Circulo.x < 0:
             Circulo.speedx = Circulo.speedx * -1
+            s = pygame.mixer.Sound("batevermelha.wav")
+            s.play()
 
     pygame.display.flip()
 
